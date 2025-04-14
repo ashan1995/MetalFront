@@ -13,5 +13,12 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 add_executable(MetalFront src/main.cpp)
+
+add_custom_target(copy_resources ALL
+	COMMAND ${CMAKE_COMMAND} -E copy_directory
+	${PROJECT_SOURCE_DIR}/resources
+	${PROJECT_BINARY_DIR}/resources
+	COMMENT "Copying resources into bin directory")
+
 target_compile_features(MetalFront PRIVATE cxx_std_17)
 target_link_libraries(MetalFront PRIVATE SFML::Graphics)
