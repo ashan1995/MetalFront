@@ -11,6 +11,9 @@ int main(){
 
     sf::Window window(sf::VideoMode({ 800, 600 }), "My window");
 
+    sf::Texture texture(RESOURCES_PATH "tank.png");
+    sf::Sprite sprite(texture);
+
     // run the program as long as the window is open
     while (window.isOpen())
     {
@@ -21,6 +24,14 @@ int main(){
             if (event->is<sf::Event::Closed>())
                 window.close();
         }
+
+        window.clear(sf::Color::Black);
+
+     
+        window.draw(sprite);
+
+       
+        window.display();
     }
     return 0;
 }
