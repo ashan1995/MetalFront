@@ -1,4 +1,8 @@
 cmake_minimum_required(VERSION 3.28)
+
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>")
+
 project(MetalFront LANGUAGES CXX)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -19,6 +23,8 @@ add_custom_target(copy_resources ALL
 	${PROJECT_SOURCE_DIR}/resources
 	${PROJECT_BINARY_DIR}/resources
 	COMMENT "Copying resources into bin directory")
+
+target_compile_definitions(${CMAKE_PROJECT_NAME} PUBLIC RESOURCES_PATH="${CMAKE_CURRENT_SOURCE_DIR}/resources/")
 
 target_compile_features(MetalFront PRIVATE cxx_std_17)
 target_link_libraries(MetalFront PRIVATE SFML::Graphics)
