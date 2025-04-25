@@ -16,7 +16,8 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(MetalFront src/main.cpp)
+file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
+add_executable(MetalFront "${MY_SOURCES}")
 
 add_custom_target(copy_resources ALL
 	COMMAND ${CMAKE_COMMAND} -E copy_directory
@@ -27,4 +28,5 @@ add_custom_target(copy_resources ALL
 target_compile_definitions(${CMAKE_PROJECT_NAME} PUBLIC RESOURCES_PATH="${CMAKE_CURRENT_SOURCE_DIR}/resources/")
 
 target_compile_features(MetalFront PRIVATE cxx_std_17)
+target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC "${CMAKE_SOURCE_DIR}/include/")
 target_link_libraries(MetalFront PRIVATE SFML::Graphics)
