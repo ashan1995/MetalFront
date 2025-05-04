@@ -11,6 +11,7 @@ int main(){
 
     sf::Texture texture(RESOURCES_PATH "tank.png");
     sf::Sprite sprite(texture);
+    sprite.scale({0.25,0.25});
 
    
     sf::RenderWindow window(sf::VideoMode({ 800, 600 }), "My window");
